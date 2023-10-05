@@ -3,11 +3,12 @@ package com.example.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.entity.Customer;
 import com.example.exceptions.CustomerAlreadyExistException;
 import com.example.repo.CustomerRepo;
-
+@Service
 public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
@@ -23,7 +24,9 @@ public class CustomerServiceImpl implements CustomerService {
         if (custOpt.isPresent()) {
             return custOpt.get();
         }
-		return new Customer(); 
+        Customer c = new Customer();
+        c.setMailId(customerId.toString());
+        return c;
 	}
 	
 	public Long updateCustomer(Customer c) {
